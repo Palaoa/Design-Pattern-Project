@@ -1,0 +1,13 @@
+﻿生成启动时间为 2016/11/17 20:14:54。
+     1>项目“F:\learn\Project\Design-Pattern-Project\MyFile\MyFile\MyFile.vcxproj”在节点 2 上(Build 个目标)。
+     1>Link:
+         F:\ｖｓ\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"F:\learn\Project\Design-Pattern-Project\MyFile\x64\Debug\\MyFile.exe" /NOLOGO /LIBPATH:C:\Qt\Qt5.6.0\5.6\msvc2013_64\lib qtmaind.lib Qt5Cored.lib Qt5Guid.lib Qt5Widgetsd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\learn\Project\Design-Pattern-Project\MyFile\x64\Debug\MyFile.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\learn\Project\Design-Pattern-Project\MyFile\x64\Debug\MyFile.lib" /MACHINE:X64 x64\Debug\moc_myfile.obj
+         x64\Debug\qrc_myfile.obj
+         x64\Debug\main.obj
+         x64\Debug\myfile.obj
+         MyFile.vcxproj -> F:\learn\Project\Design-Pattern-Project\MyFile\x64\Debug\MyFile.exe
+     1>已完成生成项目“F:\learn\Project\Design-Pattern-Project\MyFile\MyFile\MyFile.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.37
