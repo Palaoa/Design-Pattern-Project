@@ -6,6 +6,7 @@ MyTree::MyTree()
 	MyFolder* mf = new MyFolder(&mName);
 	currentNode = rootNode = mf;
 	currentPath->push_back(new QString("root"));
+	open();
 }
 
 MyTree::MyTree(MyNode *mRoot)
@@ -19,7 +20,8 @@ MyTree::~MyTree()
 {
 	delete currentPath;
 	// Yao Gai
-	delete currentNode;
+	//delete currentNode;
+	save();
 }
 
 MyNode* MyTree::getCurNode()
@@ -99,6 +101,7 @@ bool MyTree::insertNode(MyNode *mNode)
 	p1->setNext(mNode);
 	mNode->setParent(currentNode);
 	mNode->setNext(NULL);
+	mNode->setChild(NULL);
 	return 1;
 }
 
@@ -130,6 +133,32 @@ bool MyTree::deleteNode(QString* mName)
 		deleteNode(mChild->getName());
 		mChild = mNode->getChild();
 	}
-	delete mNode;
-	return 1;
+	return FileFactory::getInstance()->deleteFile(mNode);
+}
+
+void MyTree::open()
+{
+
+}
+
+void MyTree::save()
+{
+
+}
+
+bool MyTree::enterChild(MyNode* mNode)
+{
+	if (mNode->getParent() != currentNode)
+		return 0;
+	MyNode* child = currentNode->getChild();
+	while (child)
+	{
+		if (child == mNode)
+		{
+			currentNode = mNode;
+			currentPath->push_back(mNode->getName());
+			return 1;
+		}
+	}
+	return 0;
 }

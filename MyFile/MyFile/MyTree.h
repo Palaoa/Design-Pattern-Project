@@ -7,6 +7,7 @@
 #include "MyNode.h"
 #include "MyFolder.h"
 #include "MyFile.h"
+#include "FileFactory.h"
 
 class MyTree
 {
@@ -39,9 +40,11 @@ public :
 
 	bool deleteNode(QString* mName); // zai dang qian lu jing xia shan chu jie dian
 
-
 	// Hai Wei Shi Xian !!!!!!!!!!!
 	bool copyNode(MyNode* target, MyNode pasteFather);  // 将target复制到pasteFather路径下 还没写！！！
+
+	void open();
+	void save();
 
 };
 

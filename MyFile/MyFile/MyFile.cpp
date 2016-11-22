@@ -8,7 +8,7 @@ MyFile::MyFile()
 	length = INITIAL_LENGTH;
 }
 
-MyFile::MyFile(const QString* mName, int mBase, int mLen = INITIAL_LENGTH)
+MyFile::MyFile(const QString* mName, int mBase, int mLen)
 {
 	MyNode::MyNode(0, mName);
 	baseAddr = mBase;

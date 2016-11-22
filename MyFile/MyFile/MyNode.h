@@ -94,12 +94,30 @@ public:
 	}
 
 	MyNode* checkChild(QString *mName);
-	virtual QString* getContent();
-	virtual void setContent(QString*);
-	virtual int getBaseAddr();
-	virtual int getLength();
-	virtual void setBaseAddr(int);
-	virtual void setLength(int);
+	virtual QString* getContent()
+	{
+		return NULL;
+	}
+	virtual void setContent(QString*)
+	{
+
+	}
+	virtual int getBaseAddr()
+	{
+		return 0;
+	}
+	virtual int getLength()
+	{
+		return 0;
+	}
+	virtual void setBaseAddr(int)
+	{
+
+	}
+	virtual void setLength(int)
+	{
+
+	}
 private:
 
 };

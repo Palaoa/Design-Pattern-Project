@@ -1,5 +1,8 @@
 #include "FreeTable.h"
 
+FreeTable* FreeTable::instance;
+
+
 FreeTable::FreeTable()
 {
 	freeTable = new QLinkedList<freeNode>();
@@ -130,6 +133,16 @@ int FreeTable::createFile(int length)
 	}
 	return -1;
 	//wei zhao dao
+}
+
+void FreeTable::open()
+{
+
+}
+
+void FreeTable::save()
+{
+
 }
 /*
 void FreeTable::open()

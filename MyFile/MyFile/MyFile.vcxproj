@@ -137,6 +137,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FileFactory.cpp" />
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="FreeTable.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_myFileSystem.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -204,6 +206,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FileFactory.h" />
     <ClInclude Include="FileManager.h" />
     <ClInclude Include="FreeTable.h" />
     <ClInclude Include="GeneratedFiles\ui_myfile.h" />
