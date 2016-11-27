@@ -3,6 +3,7 @@
 MyFile::MyFile()
 {
 	MyNode::MyNode();
+	type = 0;
 	content = *(new QString());
 	baseAddr = 0;
 	length = INITIAL_LENGTH;

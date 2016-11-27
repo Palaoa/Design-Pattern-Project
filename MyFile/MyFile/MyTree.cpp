@@ -6,7 +6,8 @@ MyTree::MyTree()
 	MyFolder* mf = new MyFolder(&mName);
 	currentNode = rootNode = mf;
 	currentPath->push_back(new QString("root"));
-	open();
+	QDir qdir("root");
+	open(rootNode, qdir);
 }
 
 MyTree::MyTree(MyNode *mRoot)
@@ -14,14 +15,17 @@ MyTree::MyTree(MyNode *mRoot)
 	currentNode = rootNode = mRoot;
 	currentPath = new QVector<QString*>();
 	currentPath->push_back(new QString(*(currentNode->getName())));
+	QDir qdir("root");
+	open(rootNode, qdir);
 }
 
 MyTree::~MyTree()
 {
 	delete currentPath;
-	// Yao Gai
-	//delete currentNode;
-	save();
+	QDir *temp = new QDir;
+	bool ok = temp->mkdir("root");
+	QDir qdir = "root";
+	save(rootNode, qdir);
 }
 
 MyNode* MyTree::getCurNode()
@@ -136,14 +140,84 @@ bool MyTree::deleteNode(QString* mName)
 	return FileFactory::getInstance()->deleteFile(mNode);
 }
 
-void MyTree::open()
+void MyTree::open(MyNode* mNode, QDir mDir)
 {
+	MyNode* head = mNode;
+	QString str = mDir.path();
 
+	foreach(QFileInfo mfi, mDir.entryInfoList())
+	{
+		if (mfi.isFile())
+		{
+			QString name = mfi.fileName();
+			QFile file(mfi.absoluteFilePath());
+			file.open(QIODevice::ReadOnly);
+			QTextStream in(&file);
+			int mBase, mLen;
+			in >> mBase >> mLen;
+			MyFile *mFile = new MyFile(&name, mBase, mLen);
+			QString str = in.readLine();
+			while (!str.isNull())
+			{
+				mFile->getContent()->append(str);
+				str = in.readLine();
+			}
+
+			mFile->setNext(mNode->getChild());
+			mNode->setChild(mFile);
+			mFile->setParent(mNode);
+			mFile->setChild(NULL);
+			file.close();
+		}
+		else
+		{
+			if (mfi.fileName() == "." || mfi.fileName() == "..")
+				continue;
+			str = mfi.absoluteFilePath();
+			QDir qd = mfi.absoluteFilePath();
+			QString name = mfi.fileName();
+			MyFolder *mFolder = new MyFolder(&name);
+			mFolder->setNext = mNode->getChild();
+			mNode->setChild(mFolder);
+			mFolder->setParent(mNode);
+			mFolder->setChild(NULL);
+			open(mFolder, qd);
+		}
+	}
+	return;
 }
 
-void MyTree::save()
+void MyTree::save(MyNode* mNode, QDir mDir)
 {
-
+	MyNode* p = mNode->getChild();
+	QString path;
+	while (p)
+	{
+		if (p->getType())
+		{
+			mDir.mkdir(*(p->getName()));
+			save(p, QDir(mDir.path() + "/" + *(p->getName())));
+		}
+		else
+		{
+			path = mDir.path() + "/" + *(p->getName());
+			QFile file(path);
+			file.open(QIODevice::WriteOnly);
+			file.close();
+			file.open(QIODevice::WriteOnly);
+			if (file.isOpen())
+			{
+				QTextStream out(&file);
+				out << p->getBaseAddr() << " " << p->getLength() << endl;
+				out.flush();
+				out << p->getContent();
+				out.flush();
+				file.close();
+			}
+		}
+		p = p->getNext();
+	}
+	return;
 }
 
 bool MyTree::enterChild(MyNode* mNode)

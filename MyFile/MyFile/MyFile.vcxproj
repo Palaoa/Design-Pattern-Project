@@ -138,6 +138,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FileFactory.cpp" />
+    <ClCompile Include="FileIterator.cpp" />
     <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="FreeTable.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_myFileSystem.cpp">
@@ -207,6 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileFactory.h" />
+    <ClInclude Include="FileIterator.h" />
     <ClInclude Include="FileManager.h" />
     <ClInclude Include="FreeTable.h" />
     <ClInclude Include="GeneratedFiles\ui_myfile.h" />

@@ -9,6 +9,12 @@
 #include "MyFile.h"
 #include "FileFactory.h"
 
+struct MyPair
+{
+	int child;
+	int next;
+};
+
 class MyTree
 {
 private:
@@ -43,8 +49,8 @@ public :
 	// Hai Wei Shi Xian !!!!!!!!!!!
 	bool copyNode(MyNode* target, MyNode pasteFather);  // 将target复制到pasteFather路径下 还没写！！！
 
-	void open();
-	void save();
+	void open(MyNode* mNode, QDir mDir);
+	void save(MyNode* mNode, QDir mDir);
 
 };
 

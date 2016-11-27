@@ -14,11 +14,12 @@ class MyNode
 {
 private:
 	QString name;
-	bool type;		// 0 - wenjian 1 - wenjianjia
 	int protect;	// quan xian (Hai Mei Xiang Hao)  yue da yue hao
 	MyNode *child, *next, *parent;
 	int refCount = 0;  // zhi xiang gai jie dian de references
-	MyNode* ref;       
+	MyNode* ref;       // ying gai gai cheng QString * 
+protected:
+	bool type;		// 0 - wenjian 1 - wenjianjia
 	/*
 	!!!!!
 	GUAN YU REF DE DI FANG HAI YAO GAI!!!

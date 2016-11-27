@@ -144,7 +144,7 @@ void FreeTable::save()
 {
 
 }
-/*
+
 void FreeTable::open()
 {
 	QFile file("freetable.txt");
@@ -176,4 +176,3 @@ void FreeTable::save()
 	}
 	file.close();
 }
-*/
