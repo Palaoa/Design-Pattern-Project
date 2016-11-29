@@ -3,8 +3,9 @@
 MyTree::MyTree()
 {
 	QString mName = "root";
-	MyFolder* mf = new MyFolder(&mName);
+	MyNode* mf = new MyNode(1, &mName);
 	currentNode = rootNode = mf;
+	currentPath = new QVector<QString*>();
 	currentPath->push_back(new QString("root"));
 	QDir qdir("root");
 	open(rootNode, qdir);
@@ -97,6 +98,14 @@ bool MyTree::insertNode(MyNode *mNode)
 	}
 	MyNode *p1 = currentNode;
 	MyNode *p2 = currentNode->getNext();
+	if (!currentNode->getChild())
+	{
+		p1->setChild(mNode);
+		mNode->setParent(p1);
+		mNode->setChild(NULL);
+		mNode->setNext(NULL);
+		return 1;
+	}
 	while (p2)
 	{
 		p1 = p2;
@@ -177,7 +186,7 @@ void MyTree::open(MyNode* mNode, QDir mDir)
 			QDir qd = mfi.absoluteFilePath();
 			QString name = mfi.fileName();
 			MyFolder *mFolder = new MyFolder(&name);
-			mFolder->setNext = mNode->getChild();
+			mFolder->setNext(mNode->getChild());
 			mNode->setChild(mFolder);
 			mFolder->setParent(mNode);
 			mFolder->setChild(NULL);

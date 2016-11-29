@@ -7,6 +7,8 @@ MyFileSystem::MyFileSystem(QWidget *parent)
 	this->setMinimumSize(QSize(800, 650));
 	this->setMaximumSize(QSize(800, 650));
 
+	usingFile = NULL;
+
 	QFont font("Arial", 12);
 
 	QLabel *l1 = new QLabel(this);
@@ -117,7 +119,8 @@ void MyFileSystem::setTable()
 	int length = mPath->length();
 	for (int i = 0; i < length; i++)
 	{
-		str.append('/' + mPath->at(i));
+		str.append('/');
+		str.append(mPath->at(i));
 	}
 	dic->setText(str);
 	dic->adjustSize();
@@ -156,7 +159,7 @@ void MyFileSystem::onOpenClick()
 		}
 		else
 		{
-			usingFile = myNode->at(a);
+			usingFile = (MyFile*)myNode->at(a);
 			content = *(FileManager::getInstance()->openFile(myNode->at(a)));
 			showContent();
 		}
@@ -199,12 +202,14 @@ void MyFileSystem::onWriteClick()
 void MyFileSystem::onCreateClick()
 {
 	usingFile = NULL;
-	if (textName->toPlainText().isEmpty())
+	QString n = textName->toPlainText();
+	if (n.isEmpty())
 	{
 		QMessageBox::information(NULL, "Error", "Create Fail", 0x00000000L);
 		return;
 	}
-	if (textLength->toPlainText().isEmpty())
+	QString l = textLength->toPlainText();
+	if (l.isEmpty())
 	{
 		if (FileManager::getInstance()->createFile(comboBox->currentIndex(), textName->toPlainText()))
 		{

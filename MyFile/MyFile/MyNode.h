@@ -12,12 +12,15 @@
 
 class MyNode
 {
-private:
+protected:
 	QString name;
 	int protect;	// quan xian (Hai Mei Xiang Hao)  yue da yue hao
 	MyNode *child, *next, *parent;
 	int refCount = 0;  // zhi xiang gai jie dian de references
 	MyNode* ref;       // ying gai gai cheng QString * 
+	QString content;
+	int baseAddr;
+	int length;
 protected:
 	bool type;		// 0 - wenjian 1 - wenjianjia
 	/*
@@ -97,27 +100,27 @@ public:
 	MyNode* checkChild(QString *mName);
 	virtual QString* getContent()
 	{
-		return NULL;
+		return &content;
 	}
-	virtual void setContent(QString*)
+	virtual void setContent(QString* str)
 	{
-
+		content = *new QString(*str);
 	}
 	virtual int getBaseAddr()
 	{
-		return 0;
+		return baseAddr;
 	}
 	virtual int getLength()
 	{
-		return 0;
+		return length;
 	}
-	virtual void setBaseAddr(int)
+	virtual void setBaseAddr(int i)
 	{
-
+		baseAddr = i;
 	}
-	virtual void setLength(int)
+	virtual void setLength(int i)
 	{
-
+		length = i;
 	}
 private:
 

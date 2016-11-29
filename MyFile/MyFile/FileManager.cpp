@@ -30,9 +30,10 @@ FileManager::~FileManager()
 		delete curNode;
 }
 
-bool FileManager::createFile(int flag, QString &name, int length = INITIAL_LENGTH)
+bool FileManager::createFile(int flag, QString &name, int length)
 {
-	for (int i = 0; i < curNode->size(); i++)
+	int s = curNode->size();
+	for (int i = 0; i < s; i++)
 	{
 		if (curNode->at(i)->getName() == name)
 			return 0;
@@ -101,11 +102,6 @@ void FileManager::closeFile(MyNode *mNode)
 {
 
 	return;
-}
-
-QVector<MyNode*>* FileManager::getCurNode()
-{
-	return curNode;
 }
 
 bool FileManager::enterDir(QString* mDir)

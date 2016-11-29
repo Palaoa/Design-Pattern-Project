@@ -9,6 +9,7 @@
 #include <QLabel>
 #include <QComboBox>
 #include <QMessageBox>
+#include <string>
 
 #include "FileManager.h"
 #include "FileFactory.h"

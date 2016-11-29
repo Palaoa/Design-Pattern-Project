@@ -137,16 +137,6 @@ int FreeTable::createFile(int length)
 
 void FreeTable::open()
 {
-
-}
-
-void FreeTable::save()
-{
-
-}
-
-void FreeTable::open()
-{
 	QFile file("freetable.txt");
 	file.open(QIODevice::ReadOnly);
 	QTextStream in(&file);

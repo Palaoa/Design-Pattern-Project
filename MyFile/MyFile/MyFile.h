@@ -7,9 +7,7 @@
 class MyFile :public MyNode
 {
 private:
-	QString content;
-	int baseAddr;
-	int length;
+
 public:
 	MyFile();
 	MyFile(const QString* mName, int mBase, int mLen = INITIAL_LENGTH);

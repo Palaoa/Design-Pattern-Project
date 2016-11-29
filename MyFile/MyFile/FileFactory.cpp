@@ -37,10 +37,13 @@ MyNode* FileFactory::createFile(int mLength, QString* mName)
 	if (mLength)
 	{
 		int base = mFreeTable->createFile(mLength);
-		mNode = new MyFile(mName, base, mLength);
+		//mNode = new MyFile(mName, base, mLength);
+		mNode = new MyNode(0, mName);
+		mNode->setBaseAddr(base);
+		mNode->setLength(mLength);
 	}
 	else
-		mNode = new MyFolder(mName);
+		mNode = new MyNode(1, mName);
 	return mNode;
 }
 
