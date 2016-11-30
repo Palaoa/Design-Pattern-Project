@@ -5,8 +5,8 @@ MyTree::MyTree()
 	QString mName = "root";
 	MyNode* mf = new MyNode(1, &mName);
 	currentNode = rootNode = mf;
-	currentPath = new QVector<QString*>();
-	currentPath->push_back(new QString("root"));
+	currentPath = new QVector<QString>();
+	currentPath->push_back("root");
 	QDir qdir("root");
 	open(rootNode, qdir);
 }
@@ -14,8 +14,8 @@ MyTree::MyTree()
 MyTree::MyTree(MyNode *mRoot)
 {
 	currentNode = rootNode = mRoot;
-	currentPath = new QVector<QString*>();
-	currentPath->push_back(new QString(*(currentNode->getName())));
+	currentPath = new QVector<QString>();
+	currentPath->push_back(*currentNode->getName());
 	QDir qdir("root");
 	open(rootNode, qdir);
 }
@@ -58,23 +58,23 @@ bool MyTree::goBack()
 	return 0;
 }
 
-QVector<QString*>* MyTree::getCurPath() const
+QVector<QString>* MyTree::getCurPath() const
 {
 	return currentPath;
 }
 
-bool MyTree::enterCD(QVector<QString*> *mPath)
+bool MyTree::enterCD(QVector<QString> *mPath)
 {
 	MyNode *mCurNode = rootNode;
 	int mLen = mPath->length();
 	// xian que ding neng tiao zhuan
-	if (mLen < 1 || *(mPath->at(0)) != "root")
+	if (mLen < 1 || mPath->at(0) != "root")
 	{
 		return false;
 	}
 	for (int i = 1; i < mLen; i++)
 	{
-		mCurNode = mCurNode->checkChild(mPath->at(i));
+		mCurNode = mCurNode->checkChild(&mPath->at(i));
 		if (mCurNode)
 			continue;
 		return false;
@@ -83,7 +83,7 @@ bool MyTree::enterCD(QVector<QString*> *mPath)
 	currentPath->clear();
 	for (int i = 0; i < mLen; i++)
 	{
-		currentPath->push_back(new QString(*(mPath->at(i))));
+		currentPath->push_back(mPath->at(i));
 	}
 	return 1;
 }
@@ -96,8 +96,8 @@ bool MyTree::insertNode(MyNode *mNode)
 	{
 		return 0;
 	}
-	MyNode *p1 = currentNode;
-	MyNode *p2 = currentNode->getNext();
+	MyNode *p1 = currentNode->getChild();
+	MyNode *p2 = p1->getNext();
 	if (!currentNode->getChild())
 	{
 		p1->setChild(mNode);
@@ -164,7 +164,9 @@ void MyTree::open(MyNode* mNode, QDir mDir)
 			QTextStream in(&file);
 			int mBase, mLen;
 			in >> mBase >> mLen;
-			MyFile *mFile = new MyFile(&name, mBase, mLen);
+			MyNode *mFile = new MyNode(0, &name);
+			mFile->setBaseAddr(mBase);
+			mFile->setLength(mLen);
 			QString str = in.readLine();
 			while (!str.isNull())
 			{
@@ -185,7 +187,7 @@ void MyTree::open(MyNode* mNode, QDir mDir)
 			str = mfi.absoluteFilePath();
 			QDir qd = mfi.absoluteFilePath();
 			QString name = mfi.fileName();
-			MyFolder *mFolder = new MyFolder(&name);
+			MyNode *mFolder = new MyNode(1, &name);
 			mFolder->setNext(mNode->getChild());
 			mNode->setChild(mFolder);
 			mFolder->setParent(mNode);
@@ -219,7 +221,7 @@ void MyTree::save(MyNode* mNode, QDir mDir)
 				QTextStream out(&file);
 				out << p->getBaseAddr() << " " << p->getLength() << endl;
 				out.flush();
-				out << p->getContent();
+				out << *p->getContent();
 				out.flush();
 				file.close();
 			}
@@ -239,9 +241,22 @@ bool MyTree::enterChild(MyNode* mNode)
 		if (child == mNode)
 		{
 			currentNode = mNode;
-			currentPath->push_back(mNode->getName());
+			currentPath->push_back(*mNode->getName());
 			return 1;
 		}
+		child = child->getNext();
 	}
 	return 0;
+}
+
+void MyTree::setCurNode(MyNode* mNode)
+{
+	currentNode == mNode;
+	MyNode* temp = mNode;
+	currentPath->clear();
+	while (*temp->getName() != "root")
+	{
+		currentPath->insert(0, *temp->getName());
+	}
+	currentPath->insert(0, "root");
 }

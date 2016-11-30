@@ -10,6 +10,7 @@
 #include "MyNode.h"
 #include "MyTree.h"
 #include <String>
+#include "FileIterator.h"
 
 class FileManager
 {
@@ -38,7 +39,8 @@ public:
 	bool copyFile();
 	bool enterDir(QString* mDir);
 
-	QVector<QString*>* getCurPath();
+	MyNode* searchFile(QString* mName);
+	QVector<QString>* getCurPath();
 };
 
 #endif

@@ -25,7 +25,7 @@ MyNode::~MyNode()
 	delete &name;
 }
 
-MyNode* MyNode::checkChild(QString *mName)
+MyNode* MyNode::checkChild(const QString *mName)
 {
 	MyNode *mNode = child;
 	if (!mNode)

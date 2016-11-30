@@ -107,7 +107,7 @@ void FileManager::closeFile(MyNode *mNode)
 bool FileManager::enterDir(QString* mDir)
 {
 	// Xian Jie Xi
-	QVector<QString*> *mVector = new QVector<QString*>();
+	QVector<QString> *mVector = new QVector<QString>();
 	std::string mStr = mDir->toStdString();
 	std::string temp;
 	int index = mStr.find('/');
@@ -121,10 +121,10 @@ bool FileManager::enterDir(QString* mDir)
 		}
 		temp = mStr.substr(0, index);
 		mStr.erase(0, index + 1);
-		mVector->push_back(new QString(temp.data()));
+		mVector->push_back(temp.data());
 		index = mStr.find('/');
 	}
-	mVector->push_back(new QString(mStr.data()));
+	mVector->push_back(mStr.data());
 	if (!myTree->enterCD(mVector))
 		return 0;
 	if (curNode)
@@ -133,7 +133,30 @@ bool FileManager::enterDir(QString* mDir)
 	return 1;
 }
 
-QVector<QString*>* FileManager::getCurPath()
+QVector<QString>* FileManager::getCurPath()
 {
 	return myTree->getCurPath();
+}
+
+MyNode* FileManager::searchFile(QString* mName)
+{
+	FileIterator *mIter = new FileIterator(myTree->getCurNode());
+	MyNode* result;
+	if (*mName == "root")
+		return NULL;
+	while (mIter->hasNext())
+	{
+		result = mIter->next();
+		if (*(result->getName()) == *mName)// zhao dao
+		{
+			myTree->setCurNode(result->getParent());
+			if (curNode)
+				delete curNode;
+			curNode = myTree->getCurChild();
+			delete mIter;
+			return result;
+		}
+	}
+	delete mIter;
+	return NULL;
 }

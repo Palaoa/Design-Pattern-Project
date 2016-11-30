@@ -97,14 +97,16 @@ public:
 		protect = mProtect;
 	}
 
-	MyNode* checkChild(QString *mName);
+	MyNode* checkChild(const QString *mName);
 	virtual QString* getContent()
 	{
 		return &content;
 	}
 	virtual void setContent(QString* str)
 	{
-		content = *new QString(*str);
+		if (content == NULL)
+			content = *new QString();
+		content = *str;
 	}
 	virtual int getBaseAddr()
 	{

@@ -20,7 +20,7 @@ class MyTree
 private:
 	MyNode* rootNode;  // Zhe Ke Shu de Gen Jie Dian
 	MyNode* currentNode;
-	QVector<QString*>* currentPath;  // lu jing
+	QVector<QString>* currentPath;  // lu jing
 
 public :
 	MyTree();
@@ -28,6 +28,7 @@ public :
 	~MyTree();
 	MyNode *getCurNode();  //
 
+	void setCurNode(MyNode* mNode);
 	// ji de delete !!!!!
 	// ji de delete  !!!
 	//                !
@@ -36,9 +37,9 @@ public :
 
 	bool goBack();         // 返回上一级路径
 
-	QVector<QString*> *getCurPath()const;  // 返回当前路径
+	QVector<QString> *getCurPath()const;  // 返回当前路径
 
-	bool enterCD(QVector<QString*> *mPath);  //cd: root/...
+	bool enterCD(QVector<QString> *mPath);  //cd: root/...
 
 	bool enterChild(MyNode *node);  // jin ru xia yi ji lu jing
 

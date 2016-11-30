@@ -179,7 +179,8 @@ void MyFileSystem::onWriteClick()
 {
 	if (!usingFile)
 		return;
-	if (textEdit->toPlainText().isEmpty())
+	QString s = textEdit->toPlainText();
+	if (s.isEmpty())
 	{
 		QString str = "";
 		usingFile->setContent(&str);
@@ -187,7 +188,7 @@ void MyFileSystem::onWriteClick()
 		setTable();
 		return;
 	}
-	else if (FileManager::getInstance()->writeFile(&(textEdit->toPlainText()),usingFile))
+	else if (FileManager::getInstance()->writeFile(&s,usingFile))
 	{
 		QMessageBox::information(NULL, "Error", "Write Success", 0x00000000L);
 		setTable();
