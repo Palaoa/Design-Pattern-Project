@@ -27,7 +27,7 @@ public:
 	// zai dang qian lu ding xia chuang jian xin de wen jian
 	bool createFile(int flag, QString &name, int length = INITIAL_LENGTH);
 	// delete file
-	bool deleteFile(QString* mName);
+	bool deleteFile(MyNode* mNode);
 	//da kai file / folder
 	QString* openFile(MyNode* mNode);  
 	bool goBack();

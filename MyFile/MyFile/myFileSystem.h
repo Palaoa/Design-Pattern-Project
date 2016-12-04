@@ -30,23 +30,27 @@ private:
 
 	QVector<MyNode*>* myNode;
 	MyFile* usingFile;
+	MyNode* copyNode;
 
 	Ui::MyFileClass ui;
 	QTableWidget *table;
 	QPushButton *backButton;
 	QPushButton *openButton;
-	QPushButton *createButton, *deleteButton, *writeButton;
+	QPushButton *createButton, *deleteButton, *writeButton, *findButton, *copyButton, *pasteButton;
 	int tableNum;  // biao ge xiang shu liang
 	QString content;
-	QTextEdit *textEdit, *textName, *textLength;
+	QTextEdit *textEdit, *textName, *textLength, *textFind;
 	QComboBox *comboBox;
-	QLabel *dic;
+	QLabel *dic, *copyLabel;
 	public slots:
 	void onOpenClick();
 	void onBackClick();
 	void onWriteClick();
 	void onCreateClick();
 	void onDeleteClick();
+	void onFindClick();
+	void onCopyClick();
+	void onPasteClick();
 };
 
 #endif // MYFILE_H

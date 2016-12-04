@@ -50,7 +50,10 @@ MyNode* FileFactory::createFile(int mLength, QString* mName)
 bool FileFactory::deleteFile(MyNode* mNode)
 {
 	if (mNode->getType())
+	{
+		delete mNode;
 		return 1;
+	}
 	bool result = mFreeTable->deleteFile(mNode->getBaseAddr(), mNode->getLength());
 	if (result)
 		delete mNode;

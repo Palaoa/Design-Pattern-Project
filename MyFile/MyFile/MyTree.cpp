@@ -97,19 +97,17 @@ bool MyTree::insertNode(MyNode *mNode)
 		return 0;
 	}
 	MyNode *p1 = currentNode->getChild();
-	MyNode *p2 = p1->getNext();
 	if (!currentNode->getChild())
 	{
-		p1->setChild(mNode);
-		mNode->setParent(p1);
+		currentNode->setChild(mNode);
+		mNode->setParent(currentNode);
 		mNode->setChild(NULL);
 		mNode->setNext(NULL);
 		return 1;
 	}
-	while (p2)
+	while (p1->getNext())
 	{
-		p1 = p2;
-		p2 = p2->getNext();
+		p1 = p1->getNext();
 	}
 	p1->setNext(mNode);
 	mNode->setParent(currentNode);
@@ -118,9 +116,9 @@ bool MyTree::insertNode(MyNode *mNode)
 	return 1;
 }
 
-bool MyTree::deleteNode(QString* mName)
+bool MyTree::deleteNode(MyNode* mNode)
 {
-	MyNode *mNode = currentNode->checkChild(mName);
+	//MyNode *mNode = currentNode->checkChild(mName);
 	if (!mNode)
 	{
 		return 0;
@@ -143,7 +141,7 @@ bool MyTree::deleteNode(QString* mName)
 	MyNode* mChild = mNode->getChild();
 	while (mChild)
 	{
-		deleteNode(mChild->getName());
+		deleteNode(mChild);
 		mChild = mNode->getChild();
 	}
 	return FileFactory::getInstance()->deleteFile(mNode);
@@ -251,12 +249,13 @@ bool MyTree::enterChild(MyNode* mNode)
 
 void MyTree::setCurNode(MyNode* mNode)
 {
-	currentNode == mNode;
+	currentNode = mNode;
 	MyNode* temp = mNode;
 	currentPath->clear();
-	while (*temp->getName() != "root")
+	while (temp && *temp->getName() != "root")
 	{
 		currentPath->insert(0, *temp->getName());
+		temp = temp->getParent();
 	}
 	currentPath->insert(0, "root");
 }

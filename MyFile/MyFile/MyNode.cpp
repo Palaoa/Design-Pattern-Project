@@ -22,7 +22,7 @@ MyNode::MyNode(bool mType, const QString* mName)
 
 MyNode::~MyNode()
 {
-	delete &name;
+	//delete &name;
 }
 
 MyNode* MyNode::checkChild(const QString *mName)

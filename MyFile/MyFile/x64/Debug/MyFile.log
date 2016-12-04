@@ -1,18 +1,8 @@
-﻿生成启动时间为 2016/11/30 15:14:31。
+﻿生成启动时间为 2016/11/30 20:31:21。
      1>项目“F:\learn\Project\Design-Pattern-Project\MyFile\MyFile\MyFile.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
-         F:\ｖｓ\VC\bin\x86_amd64\CL.exe /c /I.\GeneratedFiles /I. /IC:\Qt\Qt5.6.0\5.6\msvc2013_64\include /I.\GeneratedFiles\Debug /IC:\Qt\Qt5.6.0\5.6\msvc2013_64\include\QtCore /IC:\Qt\Qt5.6.0\5.6\msvc2013_64\include\QtGui /IC:\Qt\Qt5.6.0\5.6\msvc2013_64\include\QtWidgets /Zi /nologo /W1 /WX- /Od /D UNICODE /D WIN32 /D WIN64 /D QT_DLL /D QT_CORE_LIB /D QT_GUI_LIB /D QT_WIDGETS_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt FileFactory.cpp FileIterator.cpp FileManager.cpp GeneratedFiles\Debug\moc_myFileSystem.cpp MyFile.cpp MyFolder.cpp MyNode.cpp MyTree.cpp main.cpp myFileSystem.cpp
-         FileFactory.cpp
-         FileIterator.cpp
-         FileManager.cpp
-         moc_myFileSystem.cpp
-         MyFile.cpp
-         MyFolder.cpp
-         MyNode.cpp
-         MyTree.cpp
-         main.cpp
+         F:\ｖｓ\VC\bin\x86_amd64\CL.exe /c /I.\GeneratedFiles /I. /IC:\Qt\Qt5.6.0\5.6\msvc2013_64\include /I.\GeneratedFiles\Debug /IC:\Qt\Qt5.6.0\5.6\msvc2013_64\include\QtCore /IC:\Qt\Qt5.6.0\5.6\msvc2013_64\include\QtGui /IC:\Qt\Qt5.6.0\5.6\msvc2013_64\include\QtWidgets /Zi /nologo /W1 /WX- /Od /D UNICODE /D WIN32 /D WIN64 /D QT_DLL /D QT_CORE_LIB /D QT_GUI_LIB /D QT_WIDGETS_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt myFileSystem.cpp
          myFileSystem.cpp
-         正在生成代码...
        Link:
          F:\ｖｓ\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"F:\learn\Project\Design-Pattern-Project\MyFile\x64\Debug\\MyFile.exe" /NOLOGO /LIBPATH:C:\Qt\Qt5.6.0\5.6\msvc2013_64\lib qtmaind.lib Qt5Cored.lib Qt5Guid.lib Qt5Widgetsd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\learn\Project\Design-Pattern-Project\MyFile\x64\Debug\MyFile.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\learn\Project\Design-Pattern-Project\MyFile\x64\Debug\MyFile.lib" /MACHINE:X64 x64\Debug\FileFactory.obj
          x64\Debug\FileIterator.obj
@@ -31,4 +21,4 @@
 
 生成成功。
 
-已用时间 00:00:11.22
+已用时间 00:00:02.19

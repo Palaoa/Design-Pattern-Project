@@ -59,9 +59,9 @@ bool FileManager::createFile(int flag, QString &name, int length)
 	return result;
 }
 
-bool FileManager::deleteFile(QString* mName)
+bool FileManager::deleteFile(MyNode* mNode)
 {
-	bool result = myTree->deleteNode(mName);
+	bool result = myTree->deleteNode(mNode);
 	if (curNode)
 		delete curNode;
 	curNode = myTree->getCurChild();

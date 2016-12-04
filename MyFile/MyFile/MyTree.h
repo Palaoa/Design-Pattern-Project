@@ -45,7 +45,7 @@ public :
 
 	bool insertNode(MyNode* node);  // zai dang qian lu jing xia zeng jia jie dian
 
-	bool deleteNode(QString* mName); // zai dang qian lu jing xia shan chu jie dian
+	bool deleteNode(MyNode* mNode); // zai dang qian lu jing xia shan chu jie dian
 
 	// Hai Wei Shi Xian !!!!!!!!!!!
 	bool copyNode(MyNode* target, MyNode pasteFather);  // 将target复制到pasteFather路径下 还没写！！！

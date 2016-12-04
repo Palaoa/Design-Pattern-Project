@@ -58,6 +58,16 @@ MyFileSystem::MyFileSystem(QWidget *parent)
 	textLength->resize(90, 30);
 	textLength->setFont(font);
 
+	textFind = new QTextEdit(this);
+	textFind->move(410, 310);
+	textFind->resize(90, 30);
+	textFind->setFont(font);
+
+	findButton = new QPushButton(this);
+	findButton->move(510, 310);
+	findButton->setText("find");
+
+
 	backButton = new QPushButton(this);
 	backButton->move(200, 500);
 	backButton->setText("Back");
@@ -73,6 +83,19 @@ MyFileSystem::MyFileSystem(QWidget *parent)
 	writeButton = new QPushButton(this);
 	writeButton->move(500, 500);
 	writeButton->setText("Write");
+
+	copyButton = new QPushButton(this);
+	copyButton->move(600, 500);
+	copyButton->setText("Copy");
+
+	pasteButton = new QPushButton(this);
+	pasteButton->move(700, 500);
+	pasteButton->setText("Paste");
+
+	copyLabel = new QLabel(this);
+	copyLabel->move(410, 360);
+	copyLabel->resize(100, 30);
+	
 
 	table = new QTableWidget(1, 2, this);
 	table->resize(400, 400);
@@ -91,7 +114,9 @@ MyFileSystem::MyFileSystem(QWidget *parent)
 	connect(writeButton, SIGNAL(clicked()), this, SLOT(onWriteClick()));
 	connect(createButton, SIGNAL(clicked()), this, SLOT(onCreateClick()));
 	connect(deleteButton, SIGNAL(clicked()), this, SLOT(onDeleteClick()));
-
+	connect(findButton, SIGNAL(clicked()), this, SLOT(onFindClick()));
+	connect(copyButton, SIGNAL(clicked()), this, SLOT(onCopyClick()));
+	connect(pasteButton, SIGNAL(clicked()), this, SLOT(onPasteClick()));
 	setTable();
 
 
@@ -115,7 +140,7 @@ void MyFileSystem::setTable()
 	myNode = FileManager::getInstance()->getCurNode();
 	tableNum = myNode->size();
 	QString str = "";
-	QVector<QString*>* mPath = FileManager::getInstance()->getCurPath();
+	QVector<QString>* mPath = FileManager::getInstance()->getCurPath();
 	int length = mPath->length();
 	for (int i = 0; i < length; i++)
 	{
@@ -241,7 +266,7 @@ void MyFileSystem::onDeleteClick()
 	int a = table->currentRow();
 	if (a < tableNum&&a >= 0)
 	{
-		if (FileManager::getInstance()->deleteFile(myNode->at(a)->getName()))
+		if (FileManager::getInstance()->deleteFile(myNode->at(a)))
 		{
 			QMessageBox::information(NULL, "Error", "Delete Success", 0x00000000L);
 			setTable();
@@ -252,4 +277,34 @@ void MyFileSystem::onDeleteClick()
 	return;
 }
 
+void MyFileSystem::onFindClick()
+{
+	QString mName = textFind->toPlainText();
+	usingFile = NULL;
+	if (mName == "")
+		return;
+	MyNode *mNode = FileManager::getInstance()->searchFile(&mName);
+	if (!mNode)
+	{
+		QMessageBox::information(NULL, "Error", "Search Failed", 0x00000000L);
+		return;
+	}
+	setTable();
+	QMessageBox::information(NULL, "Error", "Search Success", 0x00000000L);
 
+}
+
+void MyFileSystem::onCopyClick()
+{
+	int a = table->currentRow();
+	if (a < tableNum&&a >= 0)
+	{
+		copyNode = myNode->at(a);
+		copyLabel->setText(*copyNode->getName());
+	}
+}
+
+void MyFileSystem::onPasteClick()
+{
+	
+}
