@@ -63,6 +63,7 @@ QVector<QString>* MyTree::getCurPath() const
 	return currentPath;
 }
 
+
 bool MyTree::enterCD(QVector<QString> *mPath)
 {
 	MyNode *mCurNode = rootNode;
@@ -86,6 +87,25 @@ bool MyTree::enterCD(QVector<QString> *mPath)
 		currentPath->push_back(mPath->at(i));
 	}
 	return 1;
+}
+
+MyNode* MyTree::findNode(QVector<QString> *mPath)
+{
+	MyNode *mCurNode = rootNode;
+	int mLen = mPath->length();
+	// xian que ding neng tiao zhuan
+	if (mLen < 1 || mPath->at(0) != "root")
+	{
+		return false;
+	}
+	for (int i = 1; i < mLen; i++)
+	{
+		mCurNode = mCurNode->checkChild(&mPath->at(i));
+		if (mCurNode)
+			continue;
+		return 0;
+	}
+	return mCurNode;
 }
 
 bool MyTree::insertNode(MyNode *mNode)
@@ -160,17 +180,41 @@ void MyTree::open(MyNode* mNode, QDir mDir)
 			QFile file(mfi.absoluteFilePath());
 			file.open(QIODevice::ReadOnly);
 			QTextStream in(&file);
-			int mBase, mLen;
-			in >> mBase >> mLen;
+			int type, mBase, mLen, vLen;
+			in >> type;
 			MyNode *mFile = new MyNode(0, &name);
-			mFile->setBaseAddr(mBase);
-			mFile->setLength(mLen);
-			QString str = in.readLine();
-			while (!str.isNull())
+			if (type == 1)
 			{
-				mFile->getContent()->append(str);
-				str = in.readLine();
+				QString str = in.readLine();
+				mFile->setRef(str);
+				mFile->setBaseAddr(0);
+				mFile->setLength(0);
 			}
+			else
+			{
+				in >> mBase >> mLen;
+				mFile->setBaseAddr(mBase);
+				mFile->setLength(mLen);
+				if (type)
+				{
+					in >> vLen;
+					QString ref;
+					while (vLen)
+					{
+						in >> ref;
+						mFile->getRefVec()->push_back(ref);
+						vLen--;
+					}
+				}
+				QString str = in.readLine();
+				while (!str.isNull())
+				{
+					mFile->getContent()->append(str);
+					str = in.readLine();
+				}
+			}
+
+			
 
 			mFile->setNext(mNode->getChild());
 			mNode->setChild(mFile);
@@ -217,10 +261,34 @@ void MyTree::save(MyNode* mNode, QDir mDir)
 			if (file.isOpen())
 			{
 				QTextStream out(&file);
-				out << p->getBaseAddr() << " " << p->getLength() << endl;
-				out.flush();
-				out << *p->getContent();
-				out.flush();
+				if (p->getRef() != "")
+				{
+					out << "1 " << p->getRef();
+					out.flush();
+				}
+				else
+				{
+					
+					if (!p->getRefVec()->empty())
+					{
+						QVector<QString> *mVec = p->getRefVec();
+						int len = mVec->length();
+						out << "2 " << p->getBaseAddr() << " " << p->getLength() << " " << len << endl;
+						out.flush();
+						for (int i = 0; i < len; i++)
+						{
+							out << mVec->at(i) << endl;
+						}
+						out.flush();
+					}
+					else
+					{
+						out << "0 " << p->getBaseAddr() << " " << p->getLength() << endl;
+						out.flush();
+					}
+					out << *p->getContent();
+					out.flush();
+				}
 				file.close();
 			}
 		}

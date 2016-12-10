@@ -59,8 +59,14 @@ bool FileManager::createFile(int flag, QString &name, int length)
 	return result;
 }
 
+//
 bool FileManager::deleteFile(MyNode* mNode)
 {
+	QVector<QString> *mVec = mNode->getRefVec();
+	if (!mVec->empty())
+	{
+		saveRef(mNode);
+	}
 	bool result = myTree->deleteNode(mNode);
 	if (curNode)
 		delete curNode;
@@ -71,7 +77,16 @@ bool FileManager::deleteFile(MyNode* mNode)
 QString* FileManager::openFile(MyNode* mNode)
 {
 	if (!mNode->getType())
-		return mNode->getContent();
+	{
+		if (mNode->getRef() == "")
+			return mNode->getContent();
+		QVector<QString>* mVec = convertPath(mNode->getRef());
+		MyNode *rNode = myTree->findNode(mVec);
+		delete mVec;
+		if (rNode)
+			return rNode->getContent();
+		return NULL;
+	}
 	if (!myTree->enterChild(mNode))
 		return 0;
 	if (curNode)
@@ -90,8 +105,14 @@ bool FileManager::goBack()
 	return 1;
 }
 
+//
 bool FileManager::writeFile(QString* mContent, MyNode *mNode)
 {
+	QVector<QString> *mVec = mNode->getRefVec();
+	if (!mVec->empty())
+	{
+		saveRef(mNode);
+	}
 	if (mNode->getType())
 		return 0;
 	mNode->setContent(mContent);
@@ -159,4 +180,95 @@ MyNode* FileManager::searchFile(QString* mName)
 	}
 	delete mIter;
 	return NULL;
+}
+
+bool FileManager::pasteFile(MyNode *mNode)
+{
+	if (mNode->getType)
+		return 0;
+	QString mName = *mNode->getName();
+	MyNode* curN = myTree->getCurNode();
+	MyNode* rNode;
+	if (curN->checkChild(&mName))
+	{
+		// '0' - 48
+		int i = 1;
+		mName = mName.append("(1)");
+		int len = mName.length();
+		while (curN->checkChild(&mName))
+		{
+			mName[len - 2] = 48 + i;
+		}
+	}
+	bool type = mNode->getType();
+	MyNode *newNode = new MyNode(mNode->getType(), &mName);
+	newNode->setBaseAddr(0);
+	newNode->setLength(0);
+	// Mei Ref
+	if (mNode->getRef() == "")
+	{
+		newNode->setRef(mNode->getPath());
+		//mNode->RefCountAdd();
+		//rNode = mNode;
+	}
+	else
+	{
+		newNode->setRef(mNode->getRef());
+		QVector<QString> *mVector = convertPath(mNode->getRef());
+		rNode = myTree->findNode(mVector);
+		delete mVector;
+		//rNode->RefCountAdd();
+	}
+	bool result = myTree->insertNode(newNode);
+	if (!result)
+	{
+		delete newNode;
+		return 0;
+	}
+	rNode->getRefVec()->push_back(newNode->getPath());
+	if (curNode)
+		delete curNode;
+	curNode = myTree->getCurChild();
+	return 1;
+}
+
+bool FileManager::saveRef(MyNode* mNode)
+{
+	QVector<QString> *mVec = mNode->getRefVec();
+	MyNode* rNode;
+	for (int i = 0, l = mVec->length(); i < l; i++)
+	{
+		QVector<QString> *mVector = convertPath(mVec->at(i));
+		rNode = myTree->findNode(mVector);
+		rNode->setContent(mNode->getContent());
+		rNode->setLength(mNode->getLength());
+		rNode->setBaseAddr(FreeTable::getInstance()->createFile(rNode->getLength()));
+		rNode->setRef("");
+		delete mVector;
+	}
+	mNode->getRefVec()->clear();
+	return 1;
+}
+
+QVector<QString>* FileManager::convertPath(const QString& mPath)
+{
+	QVector<QString> *mVector = new QVector<QString>();
+	std::string mStr = mPath.toStdString();
+	std::string temp;
+	int index = mStr.find('/');
+	while (index != -1)
+	{
+		if (!index)
+		{
+			mStr.erase(0, 1);
+			index = mStr.find('/');
+			continue;
+		}
+		temp = mStr.substr(0, index);
+		mStr.erase(0, index + 1);
+		mVector->push_back(temp.data());
+		index = mStr.find('/');
+	}
+	mVector->push_back(mStr.data());
+	return mVector;
 }

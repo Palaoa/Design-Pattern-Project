@@ -17,7 +17,8 @@ protected:
 	int protect;	// quan xian (Hai Mei Xiang Hao)  yue da yue hao
 	MyNode *child, *next, *parent;
 	int refCount = 0;  // zhi xiang gai jie dian de references
-	MyNode* ref;       // ying gai gai cheng QString * 
+	QString ref;       // Gai Jie Dian Shi Ji Wei Zhi
+	QVector<QString>* refVec;  // Zhi Xiang Gai Jie Dian De ref
 	QString content;
 	int baseAddr;
 	int length;
@@ -98,6 +99,55 @@ public:
 	}
 
 	MyNode* checkChild(const QString *mName);
+
+	QString getRef()
+	{
+		return ref;
+	}
+
+	QString &getPath()
+	{
+		QString mPath;
+		MyNode *mNode = this;
+		while (mNode)
+		{
+			mPath = "/" + mNode->name + mPath;
+			mNode = mNode->parent;
+		}
+		return mPath;
+
+	}
+	void setRef(const QString & mDir)
+	{
+		ref = mDir;
+	}
+
+	QVector<QString>* getRefVec()
+	{
+		return refVec;
+	}
+
+	int getRefCount()
+	{
+		return refCount;
+	}
+
+	bool RefCountAdd()
+	{
+		if (refCount < 0)
+			return false;
+		refCount++;
+		return 1;
+	}
+
+	bool RefCountSub()
+	{
+		if (refCount <= 0)
+			return 0;
+		refCount--;
+		return 1;
+	}
+
 	virtual QString* getContent()
 	{
 		return &content;

@@ -15,6 +15,8 @@ struct MyPair
 	int next;
 };
 
+// type: none - 0, ref - 1, refVec - 2
+
 class MyTree
 {
 private:
@@ -40,6 +42,8 @@ public :
 	QVector<QString> *getCurPath()const;  // 返回当前路径
 
 	bool enterCD(QVector<QString> *mPath);  //cd: root/...
+
+	MyNode* findNode(QVector<QString> *mPath);
 
 	bool enterChild(MyNode *node);  // jin ru xia yi ji lu jing
 

@@ -39,8 +39,12 @@ public:
 	bool copyFile();
 	bool enterDir(QString* mDir);
 
+	// Jiang node Fu Zhi Dao Dang Qian Lu Jing Xia, Ru Guo Ming Cheng Xiang Tong, Ze Gai Ming(1,2...)
+	bool pasteFile(MyNode *mNode);
+	bool saveRef(MyNode* mNode);
 	MyNode* searchFile(QString* mName);
 	QVector<QString>* getCurPath();
+	QVector<QString>* convertPath(const QString& mPath);
 };
 
 #endif

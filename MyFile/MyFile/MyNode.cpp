@@ -8,6 +8,9 @@ MyNode::MyNode()
 	child = NULL;
 	next = NULL;
 	parent = NULL;
+	refCount = 0;
+	ref = "";
+	refVec = new QVector<QString>();
 }
 
 MyNode::MyNode(bool mType, const QString* mName)
@@ -18,6 +21,9 @@ MyNode::MyNode(bool mType, const QString* mName)
 	child = NULL;
 	next = NULL;
 	parent = NULL;
+	refCount = 0;
+	ref = "";
+	refVec = new QVector<QString>();
 }
 
 MyNode::~MyNode()
