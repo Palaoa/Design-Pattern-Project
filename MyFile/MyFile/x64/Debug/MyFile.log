@@ -1,16 +1,30 @@
-﻿生成启动时间为 2016/12/5 21:31:44。
+﻿生成启动时间为 2016/12/11 18:17:13。
      1>项目“F:\learn\Project\Design-Pattern-Project\MyFile\MyFile\MyFile.vcxproj”在节点 2 上(Build 个目标)。
-     1>ClCompile:
+     1>CustomBuild:
+         Moc'ing myFileSystem.h...
+       ClCompile:
          F:\ｖｓ\VC\bin\x86_amd64\CL.exe /c /I.\GeneratedFiles /I. /IC:\Qt\Qt5.6.0\5.6\msvc2013_64\include /I.\GeneratedFiles\Debug /IC:\Qt\Qt5.6.0\5.6\msvc2013_64\include\QtCore /IC:\Qt\Qt5.6.0\5.6\msvc2013_64\include\QtGui /IC:\Qt\Qt5.6.0\5.6\msvc2013_64\include\QtWidgets /Zi /nologo /W1 /WX- /Od /D UNICODE /D WIN32 /D WIN64 /D QT_DLL /D QT_CORE_LIB /D QT_GUI_LIB /D QT_WIDGETS_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt FileManager.cpp GeneratedFiles\Debug\moc_myFileSystem.cpp main.cpp myFileSystem.cpp
          FileManager.cpp
-     1>FileManager.cpp(178): error C2059: 语法错误:“)”
-     1>FileManager.cpp(179): error C2143: 语法错误 : 缺少“;”(在“}”的前面)
          moc_myFileSystem.cpp
          main.cpp
          myFileSystem.cpp
          正在生成代码...
-     1>已完成生成项目“F:\learn\Project\Design-Pattern-Project\MyFile\MyFile\MyFile.vcxproj”(Build 个目标)的操作 - 失败。
+       Link:
+         F:\ｖｓ\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"F:\learn\Project\Design-Pattern-Project\MyFile\x64\Debug\\MyFile.exe" /NOLOGO /LIBPATH:C:\Qt\Qt5.6.0\5.6\msvc2013_64\lib qtmaind.lib Qt5Cored.lib Qt5Guid.lib Qt5Widgetsd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\learn\Project\Design-Pattern-Project\MyFile\x64\Debug\MyFile.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\learn\Project\Design-Pattern-Project\MyFile\x64\Debug\MyFile.lib" /MACHINE:X64 x64\Debug\FileFactory.obj
+         x64\Debug\FileIterator.obj
+         x64\Debug\FileManager.obj
+         x64\Debug\FreeTable.obj
+         x64\Debug\moc_myFileSystem.obj
+         x64\Debug\qrc_myfile.obj
+         x64\Debug\main.obj
+         x64\Debug\MyFile.obj
+         x64\Debug\myFileSystem.obj
+         x64\Debug\MyFolder.obj
+         x64\Debug\MyNode.obj
+         x64\Debug\MyTree.obj
+         MyFile.vcxproj -> F:\learn\Project\Design-Pattern-Project\MyFile\x64\Debug\MyFile.exe
+     1>已完成生成项目“F:\learn\Project\Design-Pattern-Project\MyFile\MyFile\MyFile.vcxproj”(Build 个目标)的操作。
 
-生成失败。
+生成成功。
 
-已用时间 00:00:17.24
+已用时间 00:00:09.90

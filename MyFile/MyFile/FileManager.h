@@ -45,6 +45,8 @@ public:
 	MyNode* searchFile(QString* mName);
 	QVector<QString>* getCurPath();
 	QVector<QString>* convertPath(const QString& mPath);
+
+	MyNode* path2Node(QString &ref);
 };
 
 #endif

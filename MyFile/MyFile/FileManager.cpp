@@ -184,7 +184,7 @@ MyNode* FileManager::searchFile(QString* mName)
 
 bool FileManager::pasteFile(MyNode *mNode)
 {
-	if (mNode->getType)
+	if (mNode->getType())
 		return 0;
 	QString mName = *mNode->getName();
 	MyNode* curN = myTree->getCurNode();
@@ -208,6 +208,7 @@ bool FileManager::pasteFile(MyNode *mNode)
 	if (mNode->getRef() == "")
 	{
 		newNode->setRef(mNode->getPath());
+		rNode = mNode;
 		//mNode->RefCountAdd();
 		//rNode = mNode;
 	}
@@ -271,4 +272,12 @@ QVector<QString>* FileManager::convertPath(const QString& mPath)
 	}
 	mVector->push_back(mStr.data());
 	return mVector;
+}
+
+MyNode* FileManager::path2Node(QString &ref)
+{
+	QVector<QString> *mVec = convertPath(ref);
+	MyNode* result = myTree->findNode(mVec);
+	delete mVec;
+	return result;
 }

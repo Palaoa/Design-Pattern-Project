@@ -184,7 +184,12 @@ void MyFileSystem::onOpenClick()
 		}
 		else
 		{
-			usingFile = (MyFile*)myNode->at(a);
+			usingFile = myNode->at(a);
+			QString path = usingFile->getRef();
+			if (path != "")
+			{
+				usingFile = FileManager::getInstance()->path2Node(path);
+			}
 			content = *(FileManager::getInstance()->openFile(myNode->at(a)));
 			showContent();
 		}
@@ -306,5 +311,19 @@ void MyFileSystem::onCopyClick()
 
 void MyFileSystem::onPasteClick()
 {
-	
+	if (!copyNode)
+	{
+		QMessageBox::information(NULL, "Error", "Please choose a file first.", 0x00000000L);
+		return;
+	}
+	bool result = FileManager::getInstance()->pasteFile(copyNode);
+	if (result)
+	{
+		QMessageBox::information(NULL, "Error", "Copy Success.", 0x00000000L);
+		copyNode = NULL;
+		return;
+	}
+	QMessageBox::information(NULL, "Error", "Copy Failed.", 0x00000000L);
+	setTable();
+	return;
 }

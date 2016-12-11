@@ -29,7 +29,7 @@ public:
 private:
 
 	QVector<MyNode*>* myNode;
-	MyFile* usingFile;
+	MyNode* usingFile;
 	MyNode* copyNode;
 
 	Ui::MyFileClass ui;

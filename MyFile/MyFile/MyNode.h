@@ -105,7 +105,7 @@ public:
 		return ref;
 	}
 
-	QString &getPath()
+	QString getPath()
 	{
 		QString mPath;
 		MyNode *mNode = this;
