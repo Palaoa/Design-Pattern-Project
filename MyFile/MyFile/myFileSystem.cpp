@@ -185,11 +185,6 @@ void MyFileSystem::onOpenClick()
 		else
 		{
 			usingFile = myNode->at(a);
-			QString path = usingFile->getRef();
-			if (path != "")
-			{
-				usingFile = FileManager::getInstance()->path2Node(path);
-			}
 			content = *(FileManager::getInstance()->openFile(myNode->at(a)));
 			showContent();
 		}

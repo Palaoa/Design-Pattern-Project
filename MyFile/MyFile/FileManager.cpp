@@ -113,6 +113,15 @@ bool FileManager::writeFile(QString* mContent, MyNode *mNode)
 	{
 		saveRef(mNode);
 	}
+	else if (mNode->getRef() != "")
+	{
+		MyNode *rNode = path2Node(mNode->getRef());
+		int base = FreeTable::getInstance()->createFile(rNode->getLength());
+		mNode->setContent(mContent);
+		mNode->setBaseAddr(base);
+		mNode->setLength(rNode->getLength());
+		mNode->setRef("");
+	}
 	if (mNode->getType())
 		return 0;
 	mNode->setContent(mContent);
