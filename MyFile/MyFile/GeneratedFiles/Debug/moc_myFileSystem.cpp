@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MyFileSystem_t {
-    QByteArrayData data[10];
-    char stringdata0[116];
+    QByteArrayData data[11];
+    char stringdata0[127];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,12 +38,14 @@ QT_MOC_LITERAL(5, 51, 13), // "onCreateClick"
 QT_MOC_LITERAL(6, 65, 13), // "onDeleteClick"
 QT_MOC_LITERAL(7, 79, 11), // "onFindClick"
 QT_MOC_LITERAL(8, 91, 11), // "onCopyClick"
-QT_MOC_LITERAL(9, 103, 12) // "onPasteClick"
+QT_MOC_LITERAL(9, 103, 12), // "onPasteClick"
+QT_MOC_LITERAL(10, 116, 10) // "onSumClick"
 
     },
     "MyFileSystem\0onOpenClick\0\0onBackClick\0"
     "onWriteClick\0onCreateClick\0onDeleteClick\0"
-    "onFindClick\0onCopyClick\0onPasteClick"
+    "onFindClick\0onCopyClick\0onPasteClick\0"
+    "onSumClick"
 };
 #undef QT_MOC_LITERAL
 
@@ -53,7 +55,7 @@ static const uint qt_meta_data_MyFileSystem[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -61,16 +63,18 @@ static const uint qt_meta_data_MyFileSystem[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   54,    2, 0x0a /* Public */,
-       3,    0,   55,    2, 0x0a /* Public */,
-       4,    0,   56,    2, 0x0a /* Public */,
-       5,    0,   57,    2, 0x0a /* Public */,
-       6,    0,   58,    2, 0x0a /* Public */,
-       7,    0,   59,    2, 0x0a /* Public */,
-       8,    0,   60,    2, 0x0a /* Public */,
-       9,    0,   61,    2, 0x0a /* Public */,
+       1,    0,   59,    2, 0x0a /* Public */,
+       3,    0,   60,    2, 0x0a /* Public */,
+       4,    0,   61,    2, 0x0a /* Public */,
+       5,    0,   62,    2, 0x0a /* Public */,
+       6,    0,   63,    2, 0x0a /* Public */,
+       7,    0,   64,    2, 0x0a /* Public */,
+       8,    0,   65,    2, 0x0a /* Public */,
+       9,    0,   66,    2, 0x0a /* Public */,
+      10,    0,   67,    2, 0x0a /* Public */,
 
  // slots: parameters
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -97,6 +101,7 @@ void MyFileSystem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 5: _t->onFindClick(); break;
         case 6: _t->onCopyClick(); break;
         case 7: _t->onPasteClick(); break;
+        case 8: _t->onSumClick(); break;
         default: ;
         }
     }
@@ -128,13 +133,13 @@ int MyFileSystem::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }

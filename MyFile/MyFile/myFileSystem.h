@@ -36,7 +36,7 @@ private:
 	QTableWidget *table;
 	QPushButton *backButton;
 	QPushButton *openButton;
-	QPushButton *createButton, *deleteButton, *writeButton, *findButton, *copyButton, *pasteButton;
+	QPushButton *createButton, *deleteButton, *writeButton, *findButton, *copyButton, *pasteButton, *totalSizeButton;
 	int tableNum;  // biao ge xiang shu liang
 	QString content;
 	QTextEdit *textEdit, *textName, *textLength, *textFind;
@@ -51,6 +51,7 @@ private:
 	void onFindClick();
 	void onCopyClick();
 	void onPasteClick();
+	void onSumClick();
 };
 
 #endif // MYFILE_H

@@ -21,6 +21,7 @@ class FreeTable
 private:
 	QLinkedList<freeNode> *freeTable;
 	static FreeTable *instance;
+	
 public:
 	static FreeTable *getInstance();
 	FreeTable();
@@ -32,6 +33,7 @@ public:
 
 	void save();
 	void open();
+	int sum();
 };
 
 

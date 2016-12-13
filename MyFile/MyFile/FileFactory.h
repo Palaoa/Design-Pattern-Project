@@ -11,9 +11,9 @@ class FileFactory
 private:
 	FreeTable *mFreeTable;
 	static FileFactory* instance;
-
-public:
 	FileFactory();
+public:
+	
 	~FileFactory();
 	void onOpen();
 	// void initialize();
@@ -21,7 +21,10 @@ public:
 	MyNode* createFile(int mLength,QString *mName);
 	bool deleteFile(MyNode* mNode);
 	void onClose();
-
+	FreeTable* getFreeTable()
+	{
+		return mFreeTable;
+	}
 };
 
 #endif // !1

@@ -93,12 +93,15 @@ MyNode* MyTree::findNode(QVector<QString> *mPath)
 {
 	MyNode *mCurNode = rootNode;
 	int mLen = mPath->length();
+	int start = 0;
+	while (isBlock(mPath->at(start)))
+		start++;
 	// xian que ding neng tiao zhuan
-	if (mLen < 1 || mPath->at(0) != "root")
+	if (mLen < 1 || mPath->at(start) != "root")
 	{
 		return false;
 	}
-	for (int i = 1; i < mLen; i++)
+	for (int i = start + 1; i < mLen; i++)
 	{
 		mCurNode = mCurNode->checkChild(&mPath->at(i));
 		if (mCurNode)
@@ -326,4 +329,14 @@ void MyTree::setCurNode(MyNode* mNode)
 		temp = temp->getParent();
 	}
 	currentPath->insert(0, "root");
+}
+
+bool MyTree::isBlock(const QString &mStr)
+{
+	for each (QChar var in mStr)
+	{
+		if (var != ' ')
+			return 0;
+	}
+	return 1;
 }

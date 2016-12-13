@@ -166,3 +166,15 @@ void FreeTable::save()
 	}
 	file.close();
 }
+
+int FreeTable::sum()
+{
+	int result = 0;
+	QLinkedList<freeNode>::iterator it = freeTable->begin();
+	while (it != freeTable->end())
+	{
+		result += it->length;
+		it++;
+	}
+	return MaxSize - result;
+}

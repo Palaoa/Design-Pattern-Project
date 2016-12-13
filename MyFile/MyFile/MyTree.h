@@ -57,6 +57,7 @@ public :
 	void open(MyNode* mNode, QDir mDir);
 	void save(MyNode* mNode, QDir mDir);
 
+	bool isBlock(const QString &mStr);
 };
 
 #endif

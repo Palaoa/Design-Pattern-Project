@@ -96,6 +96,9 @@ MyFileSystem::MyFileSystem(QWidget *parent)
 	copyLabel->move(410, 360);
 	copyLabel->resize(100, 30);
 	
+	totalSizeButton = new QPushButton(this);
+	totalSizeButton->move(510,400);
+	totalSizeButton->setText("Total Size");
 
 	table = new QTableWidget(1, 2, this);
 	table->resize(400, 400);
@@ -117,6 +120,7 @@ MyFileSystem::MyFileSystem(QWidget *parent)
 	connect(findButton, SIGNAL(clicked()), this, SLOT(onFindClick()));
 	connect(copyButton, SIGNAL(clicked()), this, SLOT(onCopyClick()));
 	connect(pasteButton, SIGNAL(clicked()), this, SLOT(onPasteClick()));
+	connect(totalSizeButton, SIGNAL(clicked()), this, SLOT(onSumClick()));
 	setTable();
 
 
@@ -209,19 +213,19 @@ void MyFileSystem::onWriteClick()
 	{
 		QString str = "";
 		usingFile->setContent(&str);
-		QMessageBox::information(NULL, "Error", "Write Success", 0x00000000L);
+		QMessageBox::information(NULL, "!!!", "Write Success", 0x00000000L);
 		setTable();
 		return;
 	}
 	else if (FileManager::getInstance()->writeFile(&s,usingFile))
 	{
-		QMessageBox::information(NULL, "Error", "Write Success", 0x00000000L);
+		QMessageBox::information(NULL, "!!!", "Write Success", 0x00000000L);
 		setTable();
 		return;
 	}
 	else
 	{
-		QMessageBox::information(NULL, "Error", "Write Fail", 0x00000000L);
+		QMessageBox::information(NULL, "!!!", "Write Fail", 0x00000000L);
 	}
 }
 
@@ -231,7 +235,7 @@ void MyFileSystem::onCreateClick()
 	QString n = textName->toPlainText();
 	if (n.isEmpty())
 	{
-		QMessageBox::information(NULL, "Error", "Create Fail", 0x00000000L);
+		QMessageBox::information(NULL, "!!!", "Create Fail", 0x00000000L);
 		return;
 	}
 	QString l = textLength->toPlainText();
@@ -239,23 +243,23 @@ void MyFileSystem::onCreateClick()
 	{
 		if (FileManager::getInstance()->createFile(comboBox->currentIndex(), textName->toPlainText()))
 		{
-			QMessageBox::information(NULL, "Error", "Create Success", 0x00000000L);
+			QMessageBox::information(NULL, "!!!", "Create Success", 0x00000000L);
 			setTable();
 			return;
 		}
 		else
 		{
-			QMessageBox::information(NULL, "Error", "Create Fail", 0x00000000L);
+			QMessageBox::information(NULL, "!!!", "Create Fail", 0x00000000L);
 			return;
 		}
 	}
 	if (FileManager::getInstance()->createFile(comboBox->currentIndex(), textName->toPlainText(),textLength->toPlainText().toInt()))
 	{
-		QMessageBox::information(NULL, "Error", "Create Success", 0x00000000L);
+		QMessageBox::information(NULL, "!!!", "Create Success", 0x00000000L);
 		setTable();
 		return;
 	}
-	QMessageBox::information(NULL, "Error", "Create Fail", 0x00000000L);
+	QMessageBox::information(NULL, "!!!", "Create Fail", 0x00000000L);
 	return;
 }
 
@@ -268,12 +272,12 @@ void MyFileSystem::onDeleteClick()
 	{
 		if (FileManager::getInstance()->deleteFile(myNode->at(a)))
 		{
-			QMessageBox::information(NULL, "Error", "Delete Success", 0x00000000L);
+			QMessageBox::information(NULL, "!!!", "Delete Success", 0x00000000L);
 			setTable();
 			return;
 		}
 	}
-	QMessageBox::information(NULL, "Error", "Delete Fail", 0x00000000L);
+	QMessageBox::information(NULL, "!!!", "Delete Fail", 0x00000000L);
 	return;
 }
 
@@ -286,11 +290,11 @@ void MyFileSystem::onFindClick()
 	MyNode *mNode = FileManager::getInstance()->searchFile(&mName);
 	if (!mNode)
 	{
-		QMessageBox::information(NULL, "Error", "Search Failed", 0x00000000L);
+		QMessageBox::information(NULL, "!!!", "Search Failed", 0x00000000L);
 		return;
 	}
 	setTable();
-	QMessageBox::information(NULL, "Error", "Search Success", 0x00000000L);
+	QMessageBox::information(NULL, "!!!", "Search Success", 0x00000000L);
 
 }
 
@@ -308,17 +312,24 @@ void MyFileSystem::onPasteClick()
 {
 	if (!copyNode)
 	{
-		QMessageBox::information(NULL, "Error", "Please choose a file first.", 0x00000000L);
+		QMessageBox::information(NULL, "!!!", "Please choose a file first.", 0x00000000L);
 		return;
 	}
 	bool result = FileManager::getInstance()->pasteFile(copyNode);
 	if (result)
 	{
-		QMessageBox::information(NULL, "Error", "Copy Success.", 0x00000000L);
+		QMessageBox::information(NULL, "!!!", "Copy Success.", 0x00000000L);
 		copyNode = NULL;
+		setTable();
 		return;
 	}
-	QMessageBox::information(NULL, "Error", "Copy Failed.", 0x00000000L);
-	setTable();
+	QMessageBox::information(NULL, "!!!", "Copy Failed.", 0x00000000L);
 	return;
+}
+
+void MyFileSystem::onSumClick()
+{
+	int size = FileManager::getInstance()->sizeSum();
+	QString str = QString::number(size - 6400, 10);
+	QMessageBox::information(NULL, "!!!", "Total Size is: " + str, 0x00000000L);
 }

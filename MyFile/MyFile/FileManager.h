@@ -19,8 +19,9 @@ private:
 	MyTree *myTree;
 	QVector<MyNode*>* curNode;
 	MyNode* copyNode;
-public:
 	FileManager();
+public:
+	
 	~FileManager();
 	static FileManager* getInstance();
 
@@ -47,6 +48,8 @@ public:
 	QVector<QString>* convertPath(const QString& mPath);
 
 	MyNode* path2Node(QString &ref);
+
+	int sizeSum();
 };
 
 #endif

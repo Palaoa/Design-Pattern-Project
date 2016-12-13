@@ -67,6 +67,19 @@ bool FileManager::deleteFile(MyNode* mNode)
 	{
 		saveRef(mNode);
 	}
+	else if (mNode->getRef() != "")
+	{
+		MyNode *rNode = path2Node(mNode->getRef());
+		QVector<QString>::Iterator it = rNode->getRefVec()->begin();
+		QString str = mNode->getPath();
+		while (it != rNode->getRefVec()->end())
+		{
+			if (it == str)
+				break;
+			it++;
+		}
+		rNode->getRefVec()->erase(it);
+	}
 	bool result = myTree->deleteNode(mNode);
 	if (curNode)
 		delete curNode;
@@ -116,11 +129,20 @@ bool FileManager::writeFile(QString* mContent, MyNode *mNode)
 	else if (mNode->getRef() != "")
 	{
 		MyNode *rNode = path2Node(mNode->getRef());
-		int base = FreeTable::getInstance()->createFile(rNode->getLength());
+		int base = FileFactory::getInstance()->getFreeTable()->createFile(rNode->getLength());
 		mNode->setContent(mContent);
 		mNode->setBaseAddr(base);
 		mNode->setLength(rNode->getLength());
 		mNode->setRef("");
+		QVector<QString>::Iterator it = rNode->getRefVec()->begin();
+		QString str = mNode->getPath();
+		while (it != rNode->getRefVec()->end())
+		{
+			if (it == str)
+				break;
+			it++;
+		}
+		rNode->getRefVec()->erase(it);
 	}
 	if (mNode->getType())
 		return 0;
@@ -252,7 +274,7 @@ bool FileManager::saveRef(MyNode* mNode)
 		rNode = myTree->findNode(mVector);
 		rNode->setContent(mNode->getContent());
 		rNode->setLength(mNode->getLength());
-		rNode->setBaseAddr(FreeTable::getInstance()->createFile(rNode->getLength()));
+		rNode->setBaseAddr(FileFactory::getInstance()->getFreeTable()->createFile(rNode->getLength()));
 		rNode->setRef("");
 		delete mVector;
 	}
@@ -289,4 +311,9 @@ MyNode* FileManager::path2Node(QString &ref)
 	MyNode* result = myTree->findNode(mVec);
 	delete mVec;
 	return result;
+}
+
+int FileManager::sizeSum()
+{
+	return FileFactory::getInstance()->getFreeTable()->sum();
 }
