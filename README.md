@@ -1,3 +1,17 @@
+#READ ME
 # Design-Pattern-Project
-软件架构与设计模式 
-文件系统 重构项目
+
+##This is a simulation of the file system. You can perform the following functions:
+
+####File/Folder: CRUD
+####Folder:Open,Check the Folder tree,back to the parent directory by click the buttons
+####Bottom:Show sum of the Files on current node
+####Header:Show the owner's name and the path
+
+##The DesignPattern we used:
+
+####Factory Pattern（static）
+####Iterator Pattern
+####Instance Pattern
+####Composite Pattern
+####Referance Counting

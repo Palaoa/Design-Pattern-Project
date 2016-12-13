@@ -35,7 +35,7 @@ public:
 
 	void closeFile(MyNode *mNode);
 	QVector<MyNode*>* getCurNode();
-	//Zhe Ge Zhi Shi she xiang
+	//
 	bool copyFile();
 	bool enterDir(QString* mDir);
 

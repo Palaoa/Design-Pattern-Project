@@ -5,6 +5,7 @@
 #include "MyTree.h"
 #include "MyFile.h"
 #include "MyFolder.h"
+#include "FileManager.h"
 
 //Xiang Jian:
 //http://www.cplusplus.com/reference/iterator/iterator/
@@ -19,6 +20,7 @@ public:
 	MyNode* next();
 	bool hasNext();
 	bool remove();
+	MyNode* getCurNode();
 	FileIterator& operator++();
 	bool operator==(const FileIterator& rhs);
 	bool operator!=(const FileIterator& rhs);
