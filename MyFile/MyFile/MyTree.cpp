@@ -100,6 +100,7 @@ MyNode* MyTree::findNode(QVector<QString> *mPath)
 	if (mLen < 1 || mPath->at(start) != "root")
 	{
 		return false;
+
 	}
 	for (int i = start + 1; i < mLen; i++)
 	{

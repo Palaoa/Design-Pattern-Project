@@ -10,6 +10,7 @@
 
 #define INITIAL_LENGTH 200
 
+
 class MyNode
 {
 protected:

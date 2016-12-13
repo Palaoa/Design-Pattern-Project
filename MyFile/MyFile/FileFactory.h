@@ -21,6 +21,7 @@ public:
 	MyNode* createFile(int mLength,QString *mName);
 	bool deleteFile(MyNode* mNode);
 	void onClose();
+	//
 	FreeTable* getFreeTable()
 	{
 		return mFreeTable;

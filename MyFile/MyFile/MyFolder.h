@@ -5,6 +5,7 @@
 
 #include "MyNode.h"
 
+
 class MyFolder : public MyNode
 {
 private:

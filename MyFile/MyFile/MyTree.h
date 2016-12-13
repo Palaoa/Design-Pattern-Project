@@ -51,6 +51,7 @@ public :
 
 	bool deleteNode(MyNode* mNode); // zai dang qian lu jing xia shan chu jie dian
 
+
 	// Hai Wei Shi Xian !!!!!!!!!!!
 	bool copyNode(MyNode* target, MyNode pasteFather);  // 将target复制到pasteFather路径下 还没写！！！
 

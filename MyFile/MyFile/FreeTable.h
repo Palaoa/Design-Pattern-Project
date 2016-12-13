@@ -16,6 +16,7 @@ struct freeNode
 	int length;
 };
 
+
 class FreeTable
 {
 private:

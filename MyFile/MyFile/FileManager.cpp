@@ -96,6 +96,7 @@ QString* FileManager::openFile(MyNode* mNode)
 		QVector<QString>* mVec = convertPath(mNode->getRef());
 		MyNode *rNode = myTree->findNode(mVec);
 		delete mVec;
+
 		if (rNode)
 			return rNode->getContent();
 		return NULL;

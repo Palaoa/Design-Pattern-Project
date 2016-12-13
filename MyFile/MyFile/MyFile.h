@@ -4,6 +4,7 @@
 #include <QString>
 #include "MyNode.h"
 
+
 class MyFile :public MyNode
 {
 private:
